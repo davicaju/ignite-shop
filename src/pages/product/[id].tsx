@@ -16,10 +16,18 @@ interface ProductProps {
     imageUrl: string;
     price: number;
     description: string;
+    defaultPriceId: string;
   };
 }
 
 export default function Product({ product }: ProductProps) {
+  async function handleBuyProduct() {
+    try {
+    } catch (error) {
+      alert("Failed to redirect");
+    }
+  }
+
   return (
     <ProductContainer>
       <ImageContainer>
@@ -36,7 +44,7 @@ export default function Product({ product }: ProductProps) {
 
         <p>{product.description}</p>
 
-        <button>Buy now</button>
+        <button onClick={handleBuyProduct}>Buy now</button>
       </ProductDetails>
     </ProductContainer>
   );
@@ -69,6 +77,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
           currency: "BRL",
         }).format(price.unit_amount! / 100),
         description: product.description,
+        defaultPriceId: price.id,
       },
     },
     revalidate: 60 * 60 * 2, // 2 hours
