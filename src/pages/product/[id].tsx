@@ -33,9 +33,12 @@ export default function Product({ product }: ProductProps) {
     setIsCreatingCheckoutSession(true);
 
     try {
-      const response = await axios.post("/api/checkout", {
-        priceId: product.defaultPriceId,
-      });
+      const response = await axios.post(
+        "https://ignite-shop-flame-omega.vercel.app/api/checkout",
+        {
+          priceId: product.defaultPriceId,
+        }
+      );
 
       const { checkoutUrl } = response.data;
 
